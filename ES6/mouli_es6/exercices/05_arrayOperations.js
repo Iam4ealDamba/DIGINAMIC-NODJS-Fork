@@ -6,8 +6,16 @@
  *   - Les mots clées for, while, do while sont interdits
  *   - les mots clées function et return sont interdits
  *   - Vous ne pouvez pas utiliser de variable
+<<<<<<< HEAD
  *
  */
+=======
+ * 
+  */
+
+const multiplyByTwo = (array) => array.map( (value)  => value * 2 )
+
+>>>>>>> upstream/main
 
 const multiplyByTwo = (arr) => arr.map((value) => value * 2);
 ;
@@ -22,7 +30,15 @@ const multiplyByTwo = (arr) => arr.map((value) => value * 2);
  *   - Vous ne pouvez pas utiliser de variable (autre que l'argument de la fonction)
  */
 
+<<<<<<< HEAD
 const filterNameStartByA = (arr) => arr.filter((value) => value[0] === "A");
+=======
+const filterNameStartByA = (array) => array.filter( (value) => value[0] === '5' )
+
+// 5 == "5" // true
+// 5 ==="5" // false
+
+>>>>>>> upstream/main
 /**
  * Utiliser la fonction .reduce sur le tableau passé en paramètre
  * retourne la somme des valeurs du tableau
@@ -33,7 +49,13 @@ const filterNameStartByA = (arr) => arr.filter((value) => value[0] === "A");
  *   - Vous ne pouvez pas utiliser de variable (autre que l'argument de la fonction)
  */
 
+<<<<<<< HEAD
 const sum = (arr) => arr.reduce((total, value) => total + value, 0);
+=======
+const array = [1,2,3,4,5]
+
+const sum = (array) => array.reduce( (acc, value) => acc + value, 0 )
+>>>>>>> upstream/main
 /**
  * Utiliser la fonction .find sur le tableau passé en paramètre
  * retourne l'utilisateur qui a l'id passé en 2e paramètre
@@ -53,6 +75,10 @@ const sum = (arr) => arr.reduce((total, value) => total + value, 0);
  *   - Vous ne pouvez pas utiliser de variable (autre que l'argument de la fonction)
  */
 
+<<<<<<< HEAD
 const findUserById = (array, id) => array.find((value) => value.id === id).name;
+=======
+const findUserById = (array, id) => array.find( (value) => value.id === id ).name
+>>>>>>> upstream/main
 
 module.exports = { multiplyByTwo, filterNameStartByA, sum, findUserById };

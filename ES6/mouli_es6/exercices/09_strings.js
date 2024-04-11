@@ -9,6 +9,10 @@
  *  - ne pas utiliser la fonction concat de String
  */
 
+<<<<<<< HEAD
 const concat = (first, last) => `${first} ${last}`;
+=======
+const concat = (firstname, lastname) => `${firstname} ${lastname}`
+>>>>>>> upstream/main
 
 module.exports = { concat };

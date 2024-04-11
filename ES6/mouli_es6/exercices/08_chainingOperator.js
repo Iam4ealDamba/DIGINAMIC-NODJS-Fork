@@ -15,5 +15,12 @@
  *
  */
 
+<<<<<<< HEAD
 const getGroupName = (users) => users?.group?.name;
+=======
+const getGroupName = (obj) => obj?.group?.name;
+
+
+
+>>>>>>> upstream/main
 module.exports = { getGroupName };
