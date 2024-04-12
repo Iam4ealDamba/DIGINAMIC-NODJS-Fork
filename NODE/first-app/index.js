@@ -25,12 +25,10 @@ app.listen(3000, () => {
 //   res.send(`Hello ${name} ${lastname}`);
 // })
 
-app.post('/body', (req, res) => {
-  console.log(req.body);
-  res.send(`Body ${req.body.data} `);
-});
-
-const products = [{ id: 1, name: 'souris', quantity: 12, price: 15.5 }];
+const products = [
+  { id: 1, name: 'souris', quantity: 12, price: 15.5 },
+  { id: 2, name: 'souris', quantity: 12, price: 15.5 }
+];
 
 // CRUD
 
@@ -39,9 +37,49 @@ const products = [{ id: 1, name: 'souris', quantity: 12, price: 15.5 }];
 // Update PUT/PATCH
 // Delete DELETE
 
-app.get('/get/product', (req, res) => {
+
+app.get('/product', (req, res) => {
   res.send(products);
 }); // Liste
-app.get('/post/product', (req, res) => {}); // Créer un produit
-app.get('/put/product/id', (req, res) => {}); // modifier
-app.get('/delete/product/:id', (req, res) => {}); // supprimer
+
+app.post('/product', (req, res) => {
+
+  console.log("Body :")
+
+  console.log(req.body)
+  const product = {
+    id : Date.now(),
+    quantity: req.body.quantity,
+    name : req.body.name,
+    price : req.body.price
+  }
+  products.push(product)
+  res.send(product)
+}); // Créer un produit
+
+app.put('/product/:id', (req, res) => {
+  const id = parseInt( req.params.id );
+  const index = products.findIndex( (product) => product.id === id  )
+
+  const product = {
+    id : id,
+    quantity: parseInt(req.query.quantity),
+    name : req.query.name,
+    price : parseFloat(req.query.price),
+  }
+
+  products[index] = product
+
+  res.send(product)
+}); // modifier
+
+app.delete('/product/:id', (req, res) => {
+  const id = parseInt( req.params.id );
+  const index = products.findIndex( (product) => product.id === id  )
+  products.splice(index, 1);
+
+  res.send("Product deleted")
+}); // supprimer
+
+
+
