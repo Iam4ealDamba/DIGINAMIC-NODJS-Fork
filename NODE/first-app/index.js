@@ -60,7 +60,6 @@ app.post('/product', (req, res) => {
 app.put('/product/:id', (req, res) => {
   const id = parseInt( req.params.id );
   const index = products.findIndex( (product) => product.id === id  )
-
   const product = {
     id : id,
     quantity: parseInt(req.query.quantity),
