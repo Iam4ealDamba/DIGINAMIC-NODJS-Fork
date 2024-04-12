@@ -1,46 +1,42 @@
-
-const products = require("../repository/productRepository")
+const Product = require('../model/product.js');
 
 const getAll = (req, res) => {
-  res.send(products);
+  Product.findAll().then((products) => res.json(products));
 };
 
 const store = (req, res) => {
-  console.log('Body :');
-
-  console.log(req.body);
   const product = {
-    id: Date.now(),
     quantity: req.body.quantity,
     name: req.body.name,
     price: req.body.price,
   };
-  products.push(product);
-  res.send(product);
-}; // Créer un produit
+  Product.create(product)
+    .then((product) => {
+      res.send(product);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+};
 
 const update = (req, res) => {
-
-  const id = parseInt(req.params.id);
-  const index = products.findIndex((product) => product.id === id);
   const product = {
-    id: id,
     quantity: parseInt(req.body.quantity),
     name: req.body.name,
     price: parseFloat(req.body.price),
   };
 
-  products[index] = product;
-
-  res.send(product);
-}; // modifier
+  Product.update(product, { where: { id: req.params.id } })
+    .then((product) => res.send(product))
+    .catch((err) => {
+      res.send(err);
+    });
+};
 
 const destroy = (req, res) => {
-  const id = parseInt(req.params.id);
-  const index = products.findIndex((product) => product.id === id);
-  products.splice(index, 1);
-
-  res.send('Product deleted');
-}; // supprimer
+  Product.destroy({ where: { id: req.params.id } }).then(() =>
+    res.send('Product deleted')
+  );
+};
 
 module.exports = { destroy, getAll, update, store };

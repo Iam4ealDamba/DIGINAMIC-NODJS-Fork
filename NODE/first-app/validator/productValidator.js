@@ -5,10 +5,6 @@ const validateIdParam = [
   param('id')
     .notEmpty()
     .isNumeric()
-    .custom(
-      (id) => 
-        products.findIndex((product) => product.id === parseInt(id)) !== -1
-    ),
 ];
 
 const validateBodyParam = [
