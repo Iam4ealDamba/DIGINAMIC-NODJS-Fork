@@ -1,47 +1,43 @@
-const Tasks = require('../repository/taskRepository');
+const Tasks = require('../model/task');
 const controller = {};
 
 controller.getAll = (req, res) => {
-  res.send(Tasks);
+  Tasks.findAll().then((tasks) => res.json(tasks));
 };
 
 controller.store = (req, res) => {
   const task = {
-    id: Date.now(),
     title: req.body.title,
-    description: req.body.description,
-    done: false,
-    start_date:
-      req.body.start_date ?? new Date(Date.now()).toLocaleDateString('En-US'),
-    end_date: req.body.end_date,
   };
 
-  Tasks.push(task);
-  res.json(task);
+  if (req.body.description !== undefined)
+    task.description = req.body.description;
+  if (req.body.done !== undefined) task.done = req.body.done;
+  if (req.body.start_date !== undefined) task.start_date = req.body.start_date;
+  if (req.body.end_date !== undefined) task.end_date = req.body.end_date;
+
+  Tasks.create(task).then((queryResult) => res.json(queryResult));
 };
 
 controller.update = (req, res) => {
-  const id = parseInt(req.params.id);
-  const index = Tasks.findIndex((task) => task.id === id);
+  const task = {};
 
-  const task = {
-    id: id,
-    title: req.body.title ?? Tasks[index].title,
-    description: req.body.description ?? Tasks[index].description,
-    done: req.body.done ?? Tasks[index].done,
-    start_date: req.body.start_date ?? Tasks[index].start_date,
-    end_date: req.body.end_date ?? Tasks[index].end_date,
-  };
-  Tasks[index] = task;
+  if (req.body.title !== undefined) task.title = req.body.title;
+  if (req.body.description !== undefined)
+    task.description = req.body.description;
+  if (req.body.done !== undefined) task.done = req.body.done;
+  if (req.body.start_date !== undefined) task.start_date = req.body.start_date;
+  if (req.body.end_date !== undefined) task.end_date = req.body.end_date;
 
-  res.send(task);
+  Tasks.update(task, { where: { id: req.params.id } }).then((queryResult) =>
+    res.json(queryResult)
+  );
 };
 
 controller.destroy = (req, res) => {
-  const id = parseInt(req.params.id);
-  const index = Tasks.findIndex((task) => task.id === id);
-  Tasks.splice(index, 1);
-  res.send('Task deleted');
+  Tasks.destroy({ where: { id: req.params.id } }).then((queryResult) =>
+    res.json(queryResult)
+  );
 };
 
 module.exports = controller;
