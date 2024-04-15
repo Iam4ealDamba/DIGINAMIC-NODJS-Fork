@@ -34,7 +34,9 @@ controller.update = (req, res) => {
 };
 
 controller.destroy = (req, res) => {
-
+  Product.deleteOne({_id : req.params.id})
+  .then( (queryResult) => res.json(queryResult) )
+  .catch( (err) => res.json(err));
 };
 
 module.exports = controller;
