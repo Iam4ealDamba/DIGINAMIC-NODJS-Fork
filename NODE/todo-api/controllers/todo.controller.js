@@ -3,6 +3,7 @@ const db = require("../data/db");
 const { v4: uuidv4 } = require("uuid");
 
 const Todo = require("../models/Todo");
+const { validationResult } = require("express-validator");
 
 const TodoController = {
   all: (req, res) => {
@@ -19,6 +20,11 @@ const TodoController = {
     });
   },
   one: (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
     const { id } = req.params;
     const todo_occ = db.filter((todo) => todo.id == id)[0];
 
@@ -44,6 +50,11 @@ const TodoController = {
     });
   },
   create: (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
     const { title, description } = req.body;
     const todo_occ = db.filter((todo) => todo.title == title)[0];
 
@@ -82,6 +93,11 @@ const TodoController = {
     });
   },
   delete: (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
     const { id } = req.params;
     const todo_occ = db.filter((todo) => todo.id == id)[0];
 
@@ -99,6 +115,11 @@ const TodoController = {
     });
   },
   update: (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
     const { id } = req.params;
     const todo_occ = db.filter((todo) => todo.id == id)[0];
 
