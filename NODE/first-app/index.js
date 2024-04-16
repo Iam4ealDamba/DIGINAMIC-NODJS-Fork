@@ -1,25 +1,71 @@
-// ------ Dependences ------
-
-require("dotenv").config();
-
-const cors = require("cors");
-const express = require("express");
+const express = require('express');
 const app = express();
-const port = process.env.PORT || 3001;
-
-// ------ Middlewares ------
+const productRouter = require("./router/productRouter")
+const cors = require('cors');
 
 app.use(cors());
 app.use(express.json());
 
-// ------ Routes ------
-
-app.get("/", (req, res) => {
-  res.send("Hello from server !");
+app.listen(3000, () => {
+  console.log('App running on port 3000');
 });
 
-// ------ Listen ------
+app.use("/product", productRouter)
 
-app.listen(port, () => {
-  console.log(`Server listening on: http://localhost:${port}`);
-});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // localhost:3000/
+// app.get('/', (req, res) => {
+//   res.send('Hello world!');
+// });
+
+// // localhost:3000/hello/tata
+// app.get("/hello/:name", (req, res) => {
+//   const name = req.params.name
+//   res.send(`Hello ${name}`);
+// })
+
+// // localhost:3000/params?name=toto
+// app.get("/param", (req, res) => {
+//   const name = req.query.name
+//   const lastname = req.query.lastname
+//   res.send(`Hello ${name} ${lastname}`);
+// })
+
+
+// CRUD
+
+// Create POST
+// Read GET
+// Update PUT/PATCH
+// Delete DELETE
+
+
+
+
+
