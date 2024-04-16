@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+button {
+  @apply border-2 px-6 py-2;
+}
+
+button.delete {
+  @apply border-0 px-6 py-2 bg-error text-dark;
+}
+
+input[type="text"] {
+  @apply border-2 px-4 py-1 text-sm;
+}

@@ -1,0 +1,25 @@
+<% if(todos.length) {%> <% } %> <% if (todos.length) { %> <% for (let i = 0; i <
+todos.length; i++) { %>
+<li class="border-2 px-4 py-4 w-full max-w-[600px] flex items-center justify-between ">
+  <div aria-label="title" class="">
+    <h3>
+      <%= todos[i].title.length > 20 ? todos[i].title.substring(0, 20) + "..." :
+      todos[i].title %>
+    </h3>
+  </div>
+  <div aria-label="buttons">
+    <div> 
+      <a href="/todos/<%= todos[i].title.replaceAll(" ", "-") %>">
+        <button>Voir la tache</button>  
+      </a>
+    </div>
+    <div>
+      <a href="/todos/<%= todos[i].title %>/delete">
+        <button class="delete" >Supprimer</button>  
+      </a>
+    </div>
+  </div>
+</li>
+<% } %> <% } else { %>
+<p class="">Aucune taches n'a encore été ajoutée</p>
+<% } %>

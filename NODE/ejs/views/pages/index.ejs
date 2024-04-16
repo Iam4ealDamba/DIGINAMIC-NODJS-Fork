@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <%-include("../partials/head.ejs")-%>
+
+  <body>
+    <header class="fixed top-0 left-0 w-full px-4 py-4 bg-dark">
+      <form action="/api/todos" method="post" class="flex items-center gap-x-6">
+        <fieldset class="space-y-3">
+          <input
+            type="text"
+            name="title"
+            placeholder="Entrer un titre *"
+            class="border-2 w-full max-w-[300px]"
+          />
+          <input
+            type="text"
+            name="description"
+            placeholder="Entrer une description *"
+            class="border-2 w-full max-w-[300px]"
+          />
+        </fieldset>
+        <button type="submit" class="bg-light">Ajouter une tache</button>
+      </form>
+    </header>
+    <main class="px-4 mt-36">
+      <ul class="space-y-3">
+        <%-include("../partials/todos.ejs")-%>
+      </ul>
+    </main>
+  </body>
+</html>
